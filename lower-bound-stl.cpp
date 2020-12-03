@@ -21,14 +21,13 @@ int main() {
     
     while(test_cases){
         cin>>key;
-        auto it = find(v.begin(),v.end(),key);
+        auto low = lower_bound(v.begin(),v.end(),key);
 
-        if(it!= v.end()){
-            int index = it - v.begin()+1;
-            cout<<"Yes "<<index<<endl;
+        if(v[low-v.begin()]==key){
+            cout<<"Yes "<<(low-v.begin()+1)<<endl;
         }
         else{
-            auto low = lower_bound(v.begin(),v.end(),key);
+            
             cout<<"No "<<(low - v.begin()+1)<<endl;
         }
         test_cases--;
