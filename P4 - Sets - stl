@@ -1,0 +1,40 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <set>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    int t,query,num;
+    set<int> s;
+    cin>>t;
+    
+    while(t) {
+        cin>>query;
+        switch(query){
+            case 1 : 
+                cin>>num;
+                s.insert(num);
+            break;
+            
+            case 2 :
+                cin>>num;
+                s.erase(num);
+            
+            break;
+            
+            case 3 :
+                cin>>num;
+                auto itr = s.find(num);
+                if(itr!= s.end()){
+                    cout<<"Yes"<<endl;
+                }
+                else
+                    cout<<"No"<<endl;
+                break;
+        }
+        t--;
+    }
