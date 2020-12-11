@@ -1,0 +1,46 @@
+#include <iostream>
+#include <deque> 
+using namespace std;
+
+void printKMax(int arr[], int n, int k){
+	deque<int> mydeque;
+    int temp = 0;
+    int max;
+    for(int i = 0; i<n-k+1; i++){
+        for(int j = 0; j<k; j++){
+                if(mydeque.empty()){
+                    max = arr[i+j];
+                    mydeque.push_back(arr[i+j]);
+                }
+                else{
+                    if(max<arr[i+j]){
+                        mydeque.pop_back();
+                        mydeque.push_back(arr[i+j]);
+                    }
+                }  
+        }
+        max = mydeque[0];
+        cout<<max<<" ";
+        //cout<<")";
+        mydeque.clear();
+    }
+    
+    cout<<endl;
+}
+
+int main(){
+  
+	int t;
+	cin >> t;
+	while(t>0) {
+		int n,k;
+    	cin >> n >> k;
+    	int i;
+    	int arr[n];
+    	for(i=0;i<n;i++)
+      		cin >> arr[i];
+    	printKMax(arr, n, k);
+    	t--;
+  	}
+  	return 0;
+}
