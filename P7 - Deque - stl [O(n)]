@@ -1,0 +1,53 @@
+#include <iostream>
+#include <deque> 
+using namespace std;
+
+void printKMax(int arr[], int n, int k){
+	deque<int> mydeque(k);
+
+    for (int i=0 ;i<k; i++) {
+        while((!mydeque.empty())&&(arr[i]>=arr[mydeque.back()]))
+        {
+            mydeque.pop_back();    
+        }
+        mydeque.push_back(i);
+    }
+    for(int i = k; i<n; i++)
+    {
+        cout<<arr[mydeque.front()]<<" "; //element at front is largest element of previous window so print it.
+        
+        //remove the element which are out of current window
+        while((!mydeque.empty()) && (mydeque.front()<= i-k)){
+            mydeque.pop_front();
+        }
+        
+        //remove element which are smaller then currently 
+        //being added element
+        while((!mydeque.empty()) && (arr[i]>=arr[mydeque.back()])){
+            mydeque.pop_back();
+        }
+        //add current element at back of queue 
+        mydeque.push_back(i);
+    }
+    //print max of last window
+    cout<<arr[mydeque.front()]<<endl;
+    
+}
+
+
+int main(){
+  
+	int t;
+	cin >> t;
+	while(t>0) {
+		int n,k;
+    	cin >> n >> k;
+    	int i;
+    	int arr[n];
+    	for(i=0;i<n;i++)
+      		cin >> arr[i];
+    	printKMax(arr, n, k);
+    	t--;
+  	}
+  	return 0;
+}
